@@ -12,7 +12,6 @@ const App = () => {
             const result = await axios.get(`https://api.first.org/data/v1/news`)
 
             console.log(result.data.data)
-            console.log(result)
             setData(result.data.data)
         }
 

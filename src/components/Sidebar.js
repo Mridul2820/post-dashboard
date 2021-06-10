@@ -54,7 +54,7 @@ const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    width: 380px;
+    /* width: 380px; */
     padding: 60px 45px;
     background-color: #EBF2F7;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);

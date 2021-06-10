@@ -1,10 +1,14 @@
-import React from 'react'
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 
 const ListPost = ({ post }) => {
+
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + '...' : string
+    }
+
+    const handleRemove = (id) => {
+        console.log(id);
     }
 
     return (
@@ -13,17 +17,17 @@ const ListPost = ({ post }) => {
                 <img 
                     src={post.image
                         ? post.image
-                        : 'https://source.unsplash.com/random/40x40'
+                        : 'https://source.unsplash.com/random/42x42'
                     }
                     alt="post" 
                 />
                 <PostDetail>
-                    <h2>{truncate(post.title, 60)}</h2>
-                    <h3>{truncate(post.summary, 70)}</h3>
+                    <h2>{truncate(post.title, 50)}</h2>
+                    <h3>{truncate(post.summary, 60)}</h3>
                     <p>{post.published}</p>
                 </PostDetail>
             </Post>
-            <Delete>
+            <Delete onClick={() => handleRemove(post.id)}>
                 <VscChromeClose size="28px" />
             </Delete>
         </PostContainer>
@@ -38,7 +42,7 @@ const PostContainer = styled.div`
 const Post = styled.div`
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);
     height: 110px;
-    width: 650px;
+    width: 750px;
     margin-bottom: 20px;
     padding: 10px 20px;
     border-radius: 5px;
@@ -69,8 +73,8 @@ const PostDetail = styled.div`
 `
 
 const Delete = styled.div`
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     background: #ffffff;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);
     display: flex;
