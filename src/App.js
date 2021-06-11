@@ -11,7 +11,7 @@ const App = () => {
         const fetchItems = async () => {
             const result = await axios.get(`https://api.first.org/data/v1/news`)
 
-            console.log(result.data.data)
+            // console.log(result.data.data)
             setData(result.data.data)
         }
 

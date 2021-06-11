@@ -8,11 +8,12 @@ const DetailModal = ({ modalData, setModalOpen }) => {
         }
     }
 
-    console.log("modalData" ,modalData);
+    // console.log("modalData" ,modalData);
 
     return (
         <Container className="backdrop" onClick={handleClick} >
             <ModalMain>
+                {/* <iframe src={modalData.link} frameborder="0"></iframe> */}
                 <h1>{modalData.title}</h1>
                 <Img>
                     <img 
