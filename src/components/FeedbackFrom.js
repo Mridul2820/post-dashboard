@@ -1,28 +1,63 @@
 import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
-// import { BiSearch } from 'react-icons/bi'
+import { db } from '../firebase/firebase'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
 const FeedbackFrom = () => {
     const [countrySL, setCountrySL] = useState('')
     const options = useMemo(() => countryList().getData(), [])
+
+    // Input test states
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [address, setAddress] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
   
     const changeHandler = value => {
         setCountrySL(value)
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        db.collection("feedback")
+            .add({
+                firstName: firstName,
+                lastName: lastName,
+                address: address,
+                countrySL: countrySL,
+                email: email,
+                phone: phone,
+            })
+            .then(() => {
+                alert("Your feedback has been submitted");
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+
+        setFirstName("");
+        setLastName("");
+        setAddress("");
+        setEmail("");
+        setPhone("");
+    };
 
     return (
         <Container>
             <FormWrap>
                 <h1>Thank you so much for taking the time!</h1>
                 <p>Please provide the below details</p>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <InputGroup>
                         <Label>First Name : </Label>
                         <input 
                             type="text" 
                             placeholder="John" 
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                             required 
                         />
                     </InputGroup>
@@ -30,7 +65,9 @@ const FeedbackFrom = () => {
                         <Label>Last Name : </Label>
                         <input 
                             type="text" 
-                            placeholder="Doe" 
+                            placeholder="Doe"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)} 
                             required 
                         />
                     </InputGroup>
@@ -40,13 +77,20 @@ const FeedbackFrom = () => {
                             type="text" 
                             placeholder="Enter your full address : " 
                             className="address" 
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)} 
                             required 
                         />
                     </InputGroup>
                     <InputGroup>
                         <Label>Country : </Label>
                         <Country>
-                            <Select options={options} countrySL={countrySL} onChange={changeHandler} />
+                            <Select 
+                                options={options} 
+                                countrySL={countrySL} 
+                                onChange={changeHandler} 
+                                value={countrySL}
+                            />
                         </Country>
                     </InputGroup>
                     <InputGroup>
@@ -54,6 +98,8 @@ const FeedbackFrom = () => {
                         <input 
                             type="email" 
                             placeholder="example@sample.com"  
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} 
                             required
                         />
                     </InputGroup>
@@ -71,11 +117,14 @@ const FeedbackFrom = () => {
                                 placeholder="1234567890" 
                                 className="number"
                                 pattern="[7-9]{1}[0-9]{9}"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)} 
+                                required
                             />
                         </PhoneNo>
                         
                     </InputGroup>
-                    <Button>Submit Feedback</Button>
+                    <Button type="submit">Submit Feedback</Button>
                 </Form>
             </FormWrap>
         </Container>
