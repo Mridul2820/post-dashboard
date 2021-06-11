@@ -13,7 +13,7 @@ const DetailModal = ({ modalData, setModalOpen }) => {
     return (
         <Container className="backdrop" onClick={handleClick} >
             <ModalMain>
-                {/* <iframe src={modalData.link} frameborder="0"></iframe> */}
+                {/* <iframe title="Modal" src={modalData.link} frameBorder="0"></iframe>  */}
                 <h1>{modalData.title}</h1>
                 <Img>
                     <img 
