@@ -1,15 +1,20 @@
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 
-const ListPost = ({ post, handleRemove }) => {
+const ListPost = ({ post, handleRemove, setModalOpen, setModalData }) => {
 
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + '...' : string
     }
 
+    const openModal = () => {
+        setModalOpen(true)
+        setModalData(post)
+    }
+
     return (
         <PostContainer>
-            <Post>
+            <Post onClick={openModal}>
                 <img 
                     src={post.image
                         ? post.image
@@ -45,6 +50,7 @@ const Post = styled.div`
     display: flex;
     align-items: center;
     background: #ffffff;
+    cursor: pointer;
 
     img {
         width: 60px;

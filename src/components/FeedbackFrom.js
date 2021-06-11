@@ -4,7 +4,7 @@ import { db } from '../firebase/firebase'
 import Select from 'react-select'
 import countryList from 'react-select-country-list'
 
-const FeedbackFrom = () => {
+const FeedbackFrom = ({ setFormActive }) => {
     const [countrySL, setCountrySL] = useState('')
     const options = useMemo(() => countryList().getData(), [])
 
@@ -45,8 +45,14 @@ const FeedbackFrom = () => {
         setPhone("");
     };
 
+    const fromClose = (e) => {
+        if(e.target.classList.contains('backdrop')) {
+            setFormActive(false)
+        }
+    }
+
     return (
-        <Container>
+        <Container className="backdrop" onClick={fromClose} >
             <FormWrap>
                 <h1>Thank you so much for taking the time!</h1>
                 <p>Please provide the below details</p>

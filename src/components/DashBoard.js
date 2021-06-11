@@ -26,7 +26,7 @@ const DashBoard = ({ data, setData }) => {
                 data={data} 
                 setData={setData}
             />
-            {formActive && <FeedbackFrom />}
+            {formActive && <FeedbackFrom setFormActive={setFormActive} />}
         </Container>
     )
 }

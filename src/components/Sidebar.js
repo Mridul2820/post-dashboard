@@ -46,7 +46,7 @@ const Sidebar = ({ listView, setListView, cardView, setCardView, formActive, set
             }
             <Feedback>
                 <h2>Have a Feedback?</h2>
-                <Button onClick={() => setFormActive(!formActive)}>
+                <Button onClick={() => setFormActive(!formActive)} formActive={formActive}>
                     We're Listening
                 </Button>
             </Feedback>
@@ -58,7 +58,6 @@ const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* width: 380px; */
     padding: 60px 45px;
     background-color: #EBF2F7;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);
@@ -155,7 +154,7 @@ const Feedback = styled.div`
 const Button = styled.button`
     width: 100%;
     padding: 10px;
-    background-color: #96EBC7;
+    background-color: ${({formActive}) => formActive ? '#DAA4A1' : '#96EBC7'} ;
     border: none;
     outline: none;
     border-radius: 5px;

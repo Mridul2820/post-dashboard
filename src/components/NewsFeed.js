@@ -3,8 +3,12 @@ import styled from 'styled-components'
 import CardPost from './CardPost'
 import ListPost from './ListPost'
 import Pagination from './Pagination'
+import DetailModal from './DetailModal'
 
 const NewsFeed = ({ data, listView, cardView, setData }) => {
+
+    const [modalOpen, setModalOpen] = useState(false)
+    const [modalData, setModalData] = useState({})
 
     const [ currentPage, setCurrentPage ] = useState(1)
 	const [ postsPerPage ] = useState(6)
@@ -20,10 +24,7 @@ const NewsFeed = ({ data, listView, cardView, setData }) => {
 
     // Delete
     const handleRemove = (id) => {
-        console.log(id);
-
         const newData = data.filter((item) => item.id !== id);
- 
         setData(newData);
     }
 
@@ -31,13 +32,25 @@ const NewsFeed = ({ data, listView, cardView, setData }) => {
         <FeedContainer>
             <ListGrid listView={listView}>
             {listView && currentPosts.map(post => (
-                <ListPost post={post} key={post.id} handleRemove={handleRemove} />
+                <ListPost 
+                    post={post} 
+                    key={post.id} 
+                    handleRemove={handleRemove} 
+                    setModalOpen={setModalOpen} 
+                    setModalData={setModalData}
+                />
             ))}
             </ListGrid>
 
             <CardGrid cardView={cardView}>    
             {cardView && currentPosts.map(post => (
-                <CardPost post={post} key={post.id} handleRemove={handleRemove}/>
+                <CardPost 
+                    post={post} 
+                    key={post.id} 
+                    handleRemove={handleRemove} 
+                    setModalOpen={setModalOpen} 
+                    setModalData={setModalData}
+                />
             ))}
             </CardGrid>
 
@@ -48,6 +61,12 @@ const NewsFeed = ({ data, listView, cardView, setData }) => {
 				totalPosts={data.length} 
 				paginate={paginate} 
 			/>
+            { modalOpen && 
+                <DetailModal 
+                    modalData={modalData} 
+                    setModalOpen={setModalOpen} 
+                />
+            }
         </FeedContainer>
     )
 }

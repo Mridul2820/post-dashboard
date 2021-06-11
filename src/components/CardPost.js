@@ -2,17 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 
-const CardPost = ({ post, handleRemove }) => {
+const CardPost = ({ post, handleRemove, setModalOpen, setModalData }) => {
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + '...' : string
     }
     
+    const openModal = () => {
+        setModalOpen(true)
+        setModalData(post)
+    }
+
     return (
         <PostContainer>
             <Delete onClick={() => handleRemove(post.id)}>
                 <VscChromeClose size="25px" />
             </Delete>
-            <Post>
+            <Post onClick={openModal}>
                 <PostDetail>
                     <h2>{truncate(post.title, 35)}</h2>
                     <h3>{truncate(post.summary, 40)}</h3>
@@ -45,6 +50,7 @@ const Post = styled.div`
     align-items: center;
     flex-direction: column;
     background: #ffffff;
+    cursor: pointer;
 
     img {
         width: 210x;
