@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { AiOutlineUnorderedList } from 'react-icons/ai'
 import { BsCardHeading } from 'react-icons/bs'
 
-const Sidebar = ({ listView, setListView, cardView, setCardView}) => {
+const Sidebar = ({ listView, setListView, cardView, setCardView, formActive, setFormActive}) => {
 
     const CardActive = () => {
         setListView(false)
@@ -23,6 +23,7 @@ const Sidebar = ({ listView, setListView, cardView, setCardView}) => {
                     <p>Here's your News!</p>
                 </div>
             </Profile>
+            {!formActive && 
             <Toggle>
                 <h2>View Toggle</h2>
                 <ToggleIcon>
@@ -42,9 +43,12 @@ const Sidebar = ({ listView, setListView, cardView, setCardView}) => {
                     </List>
                 </ToggleIcon>
             </Toggle>
+            }
             <Feedback>
                 <h2>Have a Feedback?</h2>
-                <Button>We're Listening</Button>
+                <Button onClick={() => setFormActive(!formActive)}>
+                    We're Listening
+                </Button>
             </Feedback>
         </SidebarContainer>
     )
@@ -157,6 +161,7 @@ const Button = styled.button`
     border-radius: 5px;
     font-size: 17px;
     font-weight: 600;
+    cursor: pointer;
 `
 
 export default Sidebar

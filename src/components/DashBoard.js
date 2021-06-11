@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import NewsFeed from './NewsFeed'
 import Sidebar from './Sidebar'
+import FeedbackFrom from './FeedbackFrom'
 
 const DashBoard = ({ data, setData }) => {
     const [listView, setListView] = useState(true)
     const [cardView, setCardView] = useState(false)
+
+    const [formActive, setFormActive] = useState(false)
 
     return (
         <Container>
@@ -14,6 +17,8 @@ const DashBoard = ({ data, setData }) => {
                 setListView={setListView}
                 cardView={cardView}
                 setCardView={setCardView}
+                formActive={formActive}
+                setFormActive={setFormActive}
             />
             <NewsFeed 
                 listView={listView}
@@ -21,6 +26,7 @@ const DashBoard = ({ data, setData }) => {
                 data={data} 
                 setData={setData}
             />
+            {formActive && <FeedbackFrom />}
         </Container>
     )
 }
