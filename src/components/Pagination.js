@@ -28,7 +28,7 @@ const Pagination = ({ currentPage, setCurrentPage, postsPerPage, totalPosts, pag
     const handlePrevbtn  = () => {
         setCurrentPage(currentPage - 1)
 
-        if ((currentPage - 1) % pageNumberLimit == 0) {
+        if ((currentPage - 1) % pageNumberLimit === 0) {
             setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
             setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
         }
@@ -48,7 +48,7 @@ const Pagination = ({ currentPage, setCurrentPage, postsPerPage, totalPosts, pag
                         <li
                             key={number}
                             onClick={() => paginate(number)}
-                            className={currentPage == number ? "active" : null}
+                            className={currentPage === number ? "active" : null}
                         >
                             {number}
                         </li>
