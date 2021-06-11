@@ -20,7 +20,7 @@ const App = () => {
     return (
         <div>
             <GlobalStyle />
-            <DashBoard data={data} />
+            <DashBoard data={data} setData={setData}/>
         </div>
     )
 }

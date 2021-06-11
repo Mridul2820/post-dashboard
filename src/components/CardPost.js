@@ -2,15 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 
-const CardPost = ({ post }) => {
+const CardPost = ({ post, handleRemove }) => {
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + '...' : string
     }
-
-    const handleRemove = (id) => {
-        console.log(id);
-    }
-
+    
     return (
         <PostContainer>
             <Delete onClick={() => handleRemove(post.id)}>
@@ -41,7 +37,7 @@ const PostContainer = styled.div`
 
 const Post = styled.div`
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);
-    height: 300px;
+    height: 280px;
     width: 250px;
     padding: 30px 20px 10px 20px;
     border-radius: 5px;
@@ -58,16 +54,16 @@ const Post = styled.div`
 
 const PostDetail = styled.div`
     h2 {
-        font-size: 18px;
-        margin-bottom: 7px;
+        font-size: 17px;
+        margin-bottom: 5px;
     }
 
     h3 {
-        margin-bottom: 7px;
-        font-size: 16px;
+        margin-bottom: 5px;
+        font-size: 14px;
     }
     p {
-        font-size: 14px;
+        font-size: 13px;
         margin-bottom: 7px;
         color: #444;
     }

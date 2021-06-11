@@ -4,10 +4,10 @@ import CardPost from './CardPost'
 import ListPost from './ListPost'
 import Pagination from './Pagination'
 
-const NewsFeed = ({ data, listView, cardView, }) => {
+const NewsFeed = ({ data, listView, cardView, setData }) => {
 
     const [ currentPage, setCurrentPage ] = useState(1)
-	const [ postsPerPage, setPostsPerPage ] = useState(6)
+	const [ postsPerPage ] = useState(6)
 
 	// Get current posts
 	const indexOfLastPost = currentPage * postsPerPage;
@@ -17,17 +17,27 @@ const NewsFeed = ({ data, listView, cardView, }) => {
 	// Change Page
 	const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
+
+    // Delete
+    const handleRemove = (id) => {
+        console.log(id);
+
+        const newData = data.filter((item) => item.id !== id);
+ 
+        setData(newData);
+    }
+
     return (
         <FeedContainer>
-            <ListGrid>
+            <ListGrid listView={listView}>
             {listView && currentPosts.map(post => (
-                <ListPost post={post} key={post.id} />
+                <ListPost post={post} key={post.id} handleRemove={handleRemove} />
             ))}
             </ListGrid>
 
-            <CardGrid>    
+            <CardGrid cardView={cardView}>    
             {cardView && currentPosts.map(post => (
-                <CardPost post={post} key={post.id}/>
+                <CardPost post={post} key={post.id} handleRemove={handleRemove}/>
             ))}
             </CardGrid>
 
@@ -53,11 +63,13 @@ const ListGrid = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: ${({listView}) => listView ? '15px' : ''} ;
 `
 
 const CardGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-bottom: ${({cardView}) => cardView ? '20px' : ''} ;
 `
 
 export default NewsFeed

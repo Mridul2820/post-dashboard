@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import NewsFeed from './NewsFeed'
 import Sidebar from './Sidebar'
 
-const DashBoard = ({ data }) => {
+const DashBoard = ({ data, setData }) => {
     const [listView, setListView] = useState(true)
     const [cardView, setCardView] = useState(false)
 
@@ -19,6 +19,7 @@ const DashBoard = ({ data }) => {
                 listView={listView}
                 cardView={cardView}
                 data={data} 
+                setData={setData}
             />
         </Container>
     )

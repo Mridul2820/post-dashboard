@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 import { VscChromeClose } from 'react-icons/vsc'
 
-const ListPost = ({ post }) => {
+const ListPost = ({ post, handleRemove }) => {
 
     const truncate = (string, n) => {
         return string?.length > n ? string.substr(0, n - 1) + '...' : string
-    }
-
-    const handleRemove = (id) => {
-        console.log(id);
     }
 
     return (
@@ -41,9 +37,9 @@ const PostContainer = styled.div`
 
 const Post = styled.div`
     box-shadow: 3px 3px 20px rgba(0, 0, 0, .3);
-    height: 110px;
+    height: 84px;
     width: 750px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding: 10px 20px;
     border-radius: 5px;
     display: flex;
