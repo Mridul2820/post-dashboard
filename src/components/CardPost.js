@@ -18,7 +18,7 @@ const CardPost = ({ post }) => {
             </Delete>
             <Post>
                 <PostDetail>
-                    <h2>{truncate(post.title, 40)}</h2>
+                    <h2>{truncate(post.title, 35)}</h2>
                     <h3>{truncate(post.summary, 40)}</h3>
                     <p>{post.published}</p>
                 </PostDetail>

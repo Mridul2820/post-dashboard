@@ -1,22 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import CardPost from './CardPost'
 import ListPost from './ListPost'
+import Pagination from './Pagination'
 
 const NewsFeed = ({ data, listView, cardView, }) => {
+
+    const [ currentPage, setCurrentPage ] = useState(1)
+	const [ postsPerPage, setPostsPerPage ] = useState(6)
+
+	// Get current posts
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost)
+
+	// Change Page
+	const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     return (
         <FeedContainer>
             <ListGrid>
-            {listView && data.map(post => (
+            {listView && currentPosts.map(post => (
                 <ListPost post={post} key={post.id} />
             ))}
             </ListGrid>
 
             <CardGrid>    
-            {cardView && data.map(post => (
+            {cardView && currentPosts.map(post => (
                 <CardPost post={post} key={post.id}/>
             ))}
             </CardGrid>
+
+            <Pagination 
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+				postsPerPage={postsPerPage} 
+				totalPosts={data.length} 
+				paginate={paginate} 
+			/>
         </FeedContainer>
     )
 }
@@ -35,10 +56,8 @@ const ListGrid = styled.div`
 `
 
 const CardGrid = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 `
 
 export default NewsFeed
