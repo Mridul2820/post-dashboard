@@ -1,7 +1,12 @@
 import styled from "styled-components"
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
+import { useState } from "react";
 
 const Pagination = ({ currentPage, setCurrentPage, postsPerPage, totalPosts, paginate }) => {
+
+    const [pageNumberLimit] = useState(3);
+    const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(3);
+    const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
     const pageNumbers = []
 
@@ -13,10 +18,20 @@ const Pagination = ({ currentPage, setCurrentPage, postsPerPage, totalPosts, pag
 
     const handleNextbtn  = () => {
         setCurrentPage(currentPage + 1)
+
+        if (currentPage + 1 > maxPageNumberLimit) {
+            setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+        }
     }
 
     const handlePrevbtn  = () => {
         setCurrentPage(currentPage - 1)
+
+        if ((currentPage - 1) % pageNumberLimit == 0) {
+            setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+            setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+        }
     }
 
     return (
@@ -27,15 +42,21 @@ const Pagination = ({ currentPage, setCurrentPage, postsPerPage, totalPosts, pag
                         <AiOutlineLeft />
                     </li>
                 }
-                {pageNumbers.map(number => (
-                    <li 
-                        key={number} 
-                        onClick={() => paginate(number)}
-                        className={currentPage === number ? "active" : null}
-                    >
-                        {number}
-                    </li>
-                ))}
+                {pageNumbers.map(number => {
+                    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+                        return (
+                        <li
+                            key={number}
+                            onClick={() => paginate(number)}
+                            className={currentPage == number ? "active" : null}
+                        >
+                            {number}
+                        </li>
+                        );
+                    } else {
+                        return null;
+                    }
+                })}
                 {currentPage < totalPages && 
                     <li onClick={handleNextbtn}>
                         <AiOutlineRight />

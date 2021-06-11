@@ -7,8 +7,8 @@ import DetailModal from './DetailModal'
 
 const NewsFeed = ({ data, listView, cardView, setData }) => {
 
-    const [modalOpen, setModalOpen] = useState(false)
-    const [modalData, setModalData] = useState({})
+    const [ modalOpen, setModalOpen ] = useState(false)
+    const [ modalData, setModalData ] = useState({})
 
     const [ currentPage, setCurrentPage ] = useState(1)
 	const [ postsPerPage ] = useState(6)
